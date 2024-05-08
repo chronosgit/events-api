@@ -62,6 +62,11 @@ const ticketSchema = new mongoose.Schema({
 		type: Number,
 		required: true,
 	},
+	isArchived: {
+		type: Boolean,
+		required: true,
+		default: false,
+	},
 	event: [
 		{type: mongoose.Schema.Types.ObjectId, ref: "Event"},
 	],
@@ -70,7 +75,5 @@ const ticketSchema = new mongoose.Schema({
 	],
 });
 const Ticket = mongoose.model('Ticket', ticketSchema);
-
-// TODO: make Ticket schema and object (active & archived)
 
 module.exports = {User, Event, Ticket};
