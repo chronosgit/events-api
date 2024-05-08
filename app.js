@@ -13,6 +13,7 @@ const getAllEvents = require("./handlers/getAllEvents");
 const getSportEvents = require("./handlers/getSportEvents");
 const getConcertEvents = require("./handlers/getConcertEvents");
 const getExhibitionEvents = require("./handlers/getExhibitionEvents");
+const createTicket = require("./handlers/createTicket");
 
 // NOTE: Initializing app
 const app = express();
@@ -51,7 +52,8 @@ app.get("/api/v1/events/sport/", getSportEvents);
 app.get("/api/v1/events/concert/", getConcertEvents);
 app.get("/api/v1/events/exhibition/", getExhibitionEvents);
 
-// TODO: route for posting ticket for an event
+// Creating ticket
+app.post("/api/v1/ticket/", verifyJWT, createTicket);
 
 // TODO: route for getting user's all tickets
 
