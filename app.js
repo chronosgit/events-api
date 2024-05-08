@@ -8,6 +8,7 @@ const publicHealthCheck = require("./handlers/publicHealthCheck");
 const privateHealthCheck = require("./handlers/privateHealthCheck");
 const register = require("./handlers/register");
 const login = require("./handlers/login");
+const createEvent = require("./handlers/createEvent");
 
 // NOTE: Initializing app
 const app = express();
@@ -38,6 +39,8 @@ app.post("/api/v1/auth/register/", register);
 app.post("/api/v1/auth/login/", login);
 
 // Others
+app.post("/internal/event/", createEvent);
+
 // TODO: route for getting all events
 
 // TODO: route for getting concerts
