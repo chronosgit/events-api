@@ -26,6 +26,10 @@ const eventSchema = new mongoose.Schema({
 		data: Buffer,
 		contentType: String,
 	},
+	hasImage: {
+		type: Boolean,
+		default: false,
+	},
 	name: {
 		type: String,
 		required: true,

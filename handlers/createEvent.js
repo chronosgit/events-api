@@ -22,6 +22,8 @@ const createEvent = async (req, res) => {
 			return;
 		}
 
+		// TODO: add image adding functionality
+
 		const rootDir = path.resolve(__dirname, '../');
 		const newEvent = new Models.Event({
 			name: name, type: type, price: price, 
