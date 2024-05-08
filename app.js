@@ -1,52 +1,60 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const fileUpload = require('express-fileupload');
-require('dotenv').config();
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const fileUpload = require("express-fileupload");
+require("dotenv").config();
 const verifyJWT = require("./middleware/verifyJWT");
-const Models = require('./models');
+const publicHealthCheck = require("./handlers/publicHealthCheck");
+const privateHealthCheck = require("./handlers/privateHealthCheck");
+const register = require("./handlers/register");
+const login = require("./handlers/login");
+const createEvent = require("./handlers/createEvent");
+const getAllEvents = require("./handlers/getAllEvents");
+const getSportEvents = require("./handlers/getSportEvents");
+const getConcertEvents = require("./handlers/getConcertEvents");
+const getExhibitionEvents = require("./handlers/getExhibitionEvents");
+const createTicket = require("./handlers/createTicket");
 
 // NOTE: Initializing app
-
 const app = express();
 
 // NOTE: Middlewares
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
 // NOTE: Connecting to MongoDB
-
-mongoose.connect('mongodb://127.0.0.1:27017/swift')
-.then(() => console.log('Connected to MongoDB'))
-.catch(err => console.error('Failed to connect to MongoDB', err));
+mongoose.connect("mongodb://127.0.0.1:27017/swift")
+.then(() => console.log("Connected to MongoDB"))
+.catch(err => console.error("Failed to connect to MongoDB", err));
 
 // NOTE: Starting server
-
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
 // NOTE: Routes
+// Healthchecks
+app.get("/api/v1/healthcheck/public/", publicHealthCheck);
+app.get("/api/v1/healthcheck/private/", verifyJWT, privateHealthCheck);
 
-// TODO: healthcheck call
+// Authentication
+app.post("/api/v1/auth/register/", register);
+app.post("/api/v1/auth/login/", login);
 
-// TODO: private healthcheck call
+// Creating events
+app.post("/internal/event/", createEvent);
 
-// TODO: route for registration
+// Getting events
+app.get("/api/v1/events/all/", getAllEvents);
+app.get("/api/v1/events/sport/", getSportEvents);
+app.get("/api/v1/events/concert/", getConcertEvents);
+app.get("/api/v1/events/exhibition/", getExhibitionEvents);
 
-// TODO: route for login
+// Creating ticket
+app.post("/api/v1/ticket/", verifyJWT, createTicket);
 
-// TODO: route for getting all events
+// TODO: route for getting user's all tickets
 
-// TODO: route for getting concerts
-
-// TODO: route for getting exhibitions
-
-// TODO: route for getting sport
-
-// TODO: route for posting application
-
-// TODO: route for getting notifications of events
+// TODO: route for getting user's archived tickets
