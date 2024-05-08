@@ -15,6 +15,7 @@ const getConcertEvents = require("./handlers/getConcertEvents");
 const getExhibitionEvents = require("./handlers/getExhibitionEvents");
 const createTicket = require("./handlers/createTicket");
 const getAllTickets = require("./handlers/getAllTickets");
+const getArchivedTickets = require("./handlers/getArchivedTickets");
 
 // NOTE: Initializing app
 const app = express();
@@ -57,6 +58,5 @@ app.get("/api/v1/events/exhibition/", getExhibitionEvents);
 app.post("/api/v1/tickets/", verifyJWT, createTicket);
 
 // Getting user's tickets
-app.get("/api/v1/tickets/", verifyJWT, getAllTickets);
-
-// TODO: route for getting user's archived tickets
+app.get("/api/v1/tickets/all/", verifyJWT, getAllTickets);
+app.get("/api/v1/tickets/archived/", verifyJWT, getArchivedTickets);
