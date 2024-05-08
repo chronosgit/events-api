@@ -6,8 +6,8 @@ const createEvent = async (req, res) => {
 	try {
 		const {name, type, location, price, date, image} = req.body;
 		const validEventTypes = [
-			"concerts", "sport",
-			"exhibitions", "all", 
+			"concert", "sport",
+			"exhibition", "all", 
 		];
 
 		if(typeof type !== "string") {
@@ -17,7 +17,7 @@ const createEvent = async (req, res) => {
 
 		if(!validEventTypes.includes(type.toLowerCase())) {
 			res.status(400).send({
-				error: "Only 'concerts', 'exhibitions', 'all' and 'sport' types are valid"
+				error: "Only 'concert', 'exhibition', 'all' and 'sport' types are valid"
 			});
 			return;
 		}
