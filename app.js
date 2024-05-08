@@ -7,6 +7,7 @@ const verifyJWT = require("./middleware/verifyJWT");
 const publicHealthCheck = require("./handlers/publicHealthCheck");
 const privateHealthCheck = require("./handlers/privateHealthCheck");
 const register = require("./handlers/register");
+const login = require("./handlers/login");
 
 // NOTE: Initializing app
 const app = express();
@@ -34,7 +35,7 @@ app.get("/api/v1/healthcheck/private/", verifyJWT, privateHealthCheck);
 
 // Authentication
 app.post("/api/v1/auth/register/", register);
-// TODO: route for login
+app.post("/api/v1/auth/login/", login);
 
 // Others
 // TODO: route for getting all events
