@@ -8,7 +8,7 @@ const getConcertEvents = async (req, res) => {
 	} catch(error) {
 		console.error(error);
 
-		res.status(500).send({error: "Getting all events resulted in error"});
+		res.status(500).send({error: "Getting concerts events resulted in error"});
 	}
 };
 

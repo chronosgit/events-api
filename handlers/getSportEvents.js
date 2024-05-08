@@ -8,7 +8,7 @@ const getSportEvents = async (req, res) => {
 	} catch(error) {
 		console.error(error);
 
-		res.status(500).send({error: "Getting all events resulted in error"});
+		res.status(500).send({error: "Getting sport events resulted in error"});
 	}
 };
 
