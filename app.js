@@ -1,44 +1,41 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const fileUpload = require('express-fileupload');
-require('dotenv').config();
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const fileUpload = require("express-fileupload");
+require("dotenv").config();
 const verifyJWT = require("./middleware/verifyJWT");
-const Models = require('./models');
+const publicHealthCheck = require("./handlers/publicHealthCheck");
+const register = require("./handlers/register");
 
 // NOTE: Initializing app
-
 const app = express();
 
 // NOTE: Middlewares
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
 // NOTE: Connecting to MongoDB
-
-mongoose.connect('mongodb://127.0.0.1:27017/swift')
-.then(() => console.log('Connected to MongoDB'))
-.catch(err => console.error('Failed to connect to MongoDB', err));
+mongoose.connect("mongodb://127.0.0.1:27017/swift")
+.then(() => console.log("Connected to MongoDB"))
+.catch(err => console.error("Failed to connect to MongoDB", err));
 
 // NOTE: Starting server
-
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
 // NOTE: Routes
-
-// TODO: healthcheck call
-
+// Healthchecks
+app.get("/api/v1/healthcheck/public/", publicHealthCheck);
 // TODO: private healthcheck call
 
-// TODO: route for registration
-
+// Authentication
+app.post("/api/v1/auth/register/", register);
 // TODO: route for login
 
+// Others
 // TODO: route for getting all events
 
 // TODO: route for getting concerts
