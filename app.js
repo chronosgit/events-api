@@ -5,6 +5,7 @@ const fileUpload = require("express-fileupload");
 require("dotenv").config();
 const verifyJWT = require("./middleware/verifyJWT");
 const publicHealthCheck = require("./handlers/publicHealthCheck");
+const privateHealthCheck = require("./handlers/privateHealthCheck");
 const register = require("./handlers/register");
 
 // NOTE: Initializing app
@@ -29,7 +30,7 @@ app.listen(PORT, () => {
 // NOTE: Routes
 // Healthchecks
 app.get("/api/v1/healthcheck/public/", publicHealthCheck);
-// TODO: private healthcheck call
+app.get("/api/v1/healthcheck/private/", verifyJWT, privateHealthCheck);
 
 // Authentication
 app.post("/api/v1/auth/register/", register);
