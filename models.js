@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
+const eventSchema = require('./schemas.js');
+const userSchema = require('./schemas.js');
 
-// TODO: make Event schema and object
+const User = mongoose.model("User", userSchema);
+const Event = mongoose.model('Event', eventSchema);
 
-// TODO: make Notification schema and object
+// TODO: make Ticket schema and object (active & archived)
+
+module.exports = {User, Event};
