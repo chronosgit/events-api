@@ -9,6 +9,10 @@ const privateHealthCheck = require("./handlers/privateHealthCheck");
 const register = require("./handlers/register");
 const login = require("./handlers/login");
 const createEvent = require("./handlers/createEvent");
+const getAllEvents = require("./handlers/getAllEvents");
+const getSportEvents = require("./handlers/getSportEvents");
+const getConcertEvents = require("./handlers/getConcertEvents");
+const getExhibitionEvents = require("./handlers/getExhibitionEvents");
 
 // NOTE: Initializing app
 const app = express();
@@ -38,16 +42,14 @@ app.get("/api/v1/healthcheck/private/", verifyJWT, privateHealthCheck);
 app.post("/api/v1/auth/register/", register);
 app.post("/api/v1/auth/login/", login);
 
-// Others
+// Creating events
 app.post("/internal/event/", createEvent);
 
-// TODO: route for getting all events
-
-// TODO: route for getting concerts
-
-// TODO: route for getting exhibitions
-
-// TODO: route for getting sport events
+// Getting events
+app.get("/api/v1/events/all/", getAllEvents);
+app.get("/api/v1/events/sport/", getSportEvents);
+app.get("/api/v1/events/concert/", getConcertEvents);
+app.get("/api/v1/events/exhibition/", getExhibitionEvents);
 
 // TODO: route for posting ticket for an event
 
