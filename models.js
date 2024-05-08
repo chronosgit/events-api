@@ -1,29 +1,10 @@
 const mongoose = require('mongoose');
+const eventSchema = require('./schemas.js');
+const userSchema = require('./schemas.js');
 
+const User = mongoose.model("User", userSchema);
+const Event = mongoose.model('Event', eventSchema);
 
-// const postSchema = new mongoose.Schema({
-// 	author: {
-// 			type: mongoose.Schema.Types.ObjectId, ref: "User",
-// 	},
-// 	authorUsername: String,
-// 	title: String,
-// 	topic: String,
-// 	text: String,
-// 	date: Date,
-// 	comments: [
-// 			{type: Array, "default": []},
-// 	],
-// 	likes: [
-// 			{type: mongoose.Schema.Types.ObjectId, ref: "User"},
-// 	],
-// 	reposts: [
-// 			{type: mongoose.Schema.Types.ObjectId, ref: "User"},
-// 	],
-// 	isEdited: {
-// 			type: Boolean,
-// 			default: false,
-// 	},
-// });
-// const Post = mongoose.model("Post", postSchema);
+// TODO: make Ticket schema and object (active & archived)
 
-// module.exports = {User, Post, Comment, Notification};
+module.exports = {User, Event};
