@@ -53,6 +53,24 @@ const eventSchema = new mongoose.Schema({
 });
 const Event = mongoose.model('Event', eventSchema);
 
+const ticketSchema = new mongoose.Schema({
+	quantity: {
+		type: Number,
+		required: true,
+	},
+	price: {
+		type: Number,
+		required: true,
+	},
+	event: [
+		{type: mongoose.Schema.Types.ObjectId, ref: "Event"},
+	],
+	user: [
+		{type: mongoose.Schema.Types.ObjectId, ref: "User"},
+	],
+});
+const Ticket = mongoose.model('Ticket', ticketSchema);
+
 // TODO: make Ticket schema and object (active & archived)
 
-module.exports = {User, Event};
+module.exports = {User, Event, Ticket};
