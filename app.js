@@ -44,8 +44,10 @@ app.post("/api/v1/auth/login/", login);
 
 // TODO: route for getting exhibitions
 
-// TODO: route for getting sport
+// TODO: route for getting sport events
 
-// TODO: route for posting application
+// TODO: route for posting ticket for an event
 
-// TODO: route for getting notifications of events
+// TODO: route for getting user's all tickets
+
+// TODO: route for getting user's archived tickets
