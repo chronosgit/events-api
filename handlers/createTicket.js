@@ -33,6 +33,7 @@ const createTicket = async (req, res) => {
 
 		if(!event) {
 			res.status(404).send({error: "Event with such id doesn't exist"});
+			return;
 		}
 
 		const newTicket = new Models.Ticket({
