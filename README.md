@@ -148,6 +148,81 @@ http://localhost:3001
 }
 ```
 
+### GET /api/v1/events/sport/
+
+**Getting sport events**
+
+**Response 200 example (JSON)**
+```js
+{
+	"events": [
+		{
+			"defaultImage": {
+				"data": {
+					"type":"Buffer","data": [BYTE ARRAY]
+				}
+			},
+			"_id": "663c5d5ca3708a9482fd87d2",
+			"hasImage": false,
+			"name": "Weissnat, Greenfelder and Pacocha","type":"sport",
+			"location": "419 Walsh Brooks","date":"2024-11-02T20:50:08.000Z",
+			"price": 1337,
+			"__v": 0
+		}
+	]
+}
+```
+
+### GET /api/v1/events/concert/
+
+**Getting concert events**
+
+**Response 200 example (JSON)**
+```js
+{
+	"events": [
+		{
+			"defaultImage": {
+				"data": {
+					"type":"Buffer","data": [BYTE ARRAY]
+				}
+			},
+			"_id": "663c5d5ca3708a9482fd87d2",
+			"hasImage": false,
+			"name": "Weissnat, Greenfelder and Pacocha","type":"sport",
+			"location": "419 Walsh Brooks","date":"2024-11-02T20:50:08.000Z",
+			"price": 1337,
+			"__v": 0
+		}
+	]
+}
+```
+
+### GET /api/v1/events/exhibition/
+
+**Getting exhibition events**
+
+**Response 200 example (JSON)**
+```js
+{
+	"events": [
+		{
+			"defaultImage": {
+				"data": {
+					"type":"Buffer","data": [BYTE ARRAY]
+				}
+			},
+			"_id": "663c5d5ca3708a9482fd87d2",
+			"hasImage": false,
+			"name": "Weissnat, Greenfelder and Pacocha","type":"sport",
+			"location": "419 Walsh Brooks","date":"2024-11-02T20:50:08.000Z",
+			"price": 1337,
+			"__v": 0
+		}
+	]
+}
+```
+
 ### POST /api/v1/tickets/?eventId={{EVENT_ID}}
 
 **Creating ticket for certain event**
