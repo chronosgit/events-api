@@ -1,0 +1,611 @@
+{
+	"info": {
+		"_postman_id": "c220757f-ef09-4f98-b960-1c864450f087",
+		"name": "KBTU Swift Final",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25558607"
+	},
+	"item": [
+		{
+			"name": "Public healthcheck",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/healthcheck/public/",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"healthcheck",
+						"public",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful registration\", () => {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"if(response) {\r",
+							"    pm.test(\"Response has correct response\", () => {\r",
+							"        const secret = response[\"secret\"];\r",
+							"        pm.expect(secret).to.not.be.empty;\r",
+							"        pm.expect(secret).to.be.an(\"string\");\r",
+							"\r",
+							"        const username = response[\"username\"];\r",
+							"        pm.expect(username).to.not.be.empty;\r",
+							"        pm.expect(username).to.be.an(\"string\");\r",
+							"\r",
+							"        if(username && secret) {\r",
+							"            pm.environment.set(\"USER_ID\", response[\"id\"]);\r",
+							"            pm.environment.set(\"USERNAME\", response[\"username\"]);\r",
+							"            pm.environment.set(\"SECRET\", response[\"secret\"]);\r",
+							"        }\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Nurken\",\r\n    \"password\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/auth/register/",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"register",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful login\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"if(response) {\r",
+							"    pm.test(\"Response has JWT token\", () => {\r",
+							"        const secret = response[\"secret\"];\r",
+							"        pm.expect(secret).to.not.be.empty;\r",
+							"        pm.expect(secret).to.be.an(\"string\");\r",
+							"\r",
+							"        const username = response[\"username\"];\r",
+							"        pm.expect(username).to.not.be.empty;\r",
+							"        pm.expect(username).to.be.an(\"string\");\r",
+							"\r",
+							"        if(username && secret) {\r",
+							"            pm.environment.set(\"USERNAME\", username);\r",
+							"            pm.environment.set(\"SECRET\", secret);\r",
+							"            pm.environment.set(\"USER_ID\", response[\"id\"]);\r",
+							"        }\r",
+							"    });\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Nurken\",\r\n    \"password\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/auth/login/",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Private healthcheck",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"secret\": \"{{SECRET}}\",\r\n    \"username\": \"{{USERNAME}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/healthcheck/private/",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"healthcheck",
+						"private",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create sport event",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{$randomCompanyName}}\",\r\n    \"type\": \"sport\",\r\n    \"location\": \"{{$randomStreetAddress}}\",\r\n    \"date\":  \"{{$randomDateFuture}}\",\r\n    \"price\": 1337\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/internal/event/",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"internal",
+						"event",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create exhibition event",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{$randomCompanyName}}\",\r\n    \"type\": \"exhibition\",\r\n    \"location\": \"{{$randomStreetAddress}}\",\r\n    \"date\":  \"{{$randomDateFuture}}\",\r\n    \"price\": 3321\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/internal/event/",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"internal",
+						"event",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create concert event",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{$randomCompanyName}}\",\r\n    \"type\": \"concert\",\r\n    \"location\": \"{{$randomStreetAddress}}\",\r\n    \"date\":  \"{{$randomDateFuture}}\",\r\n    \"price\": 921\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/internal/event/",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"internal",
+						"event",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all events",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const res = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Valid length\", () => {\r",
+							"    const length = res.events.length;\r",
+							"\r",
+							"    pm.expect(length).to.above(-1);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "file",
+					"file": {}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/events/all/",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"events",
+						"all",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get sport events",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const res = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Valid length\", () => {\r",
+							"    const length = res.events.length;\r",
+							"    console.log(length);\r",
+							"\r",
+							"    pm.expect(length).to.above(-1);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/events/sport/",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"events",
+						"sport",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get concert events",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const res = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Valid length\", () => {\r",
+							"    const length = res.events.length;\r",
+							"    console.log(length);\r",
+							"\r",
+							"    pm.expect(length).to.above(-1);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/events/concert/",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"events",
+						"concert",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get exhibition events",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const res = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Valid length\", () => {\r",
+							"    const length = res.events.length;\r",
+							"    console.log(length);\r",
+							"\r",
+							"    pm.expect(length).to.above(-1);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/events/exhibition/",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"events",
+						"exhibition",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create ticket",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"quantity\": 1,\r\n    \"price\": 4,\r\n    \"username\": \"{{USERNAME}}\",\r\n    \"secret\": \"{{SECRET}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/tickets/?eventId={{EVENT_ID}}",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"tickets",
+						""
+					],
+					"query": [
+						{
+							"key": "eventId",
+							"value": "{{EVENT_ID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user's all tickets",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"{{USERNAME}}\",\r\n    \"secret\": \"{{SECRET}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/tickets/all/",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"tickets",
+						"all",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user's archived tickets",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{JWT}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"{{USERNAME}}\",\r\n    \"secret\": \"{{SECRET}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/tickets/archived/",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"tickets",
+						"archived",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
