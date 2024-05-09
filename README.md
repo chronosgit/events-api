@@ -139,7 +139,8 @@ http://localhost:3001
 			},
 			"_id": "663c5d5ca3708a9482fd87d2",
 			"hasImage": false,
-			"name": "Weissnat, Greenfelder and Pacocha","type":"sport",
+			"name": "Weissnat, Greenfelder and Pacocha",
+			"type": "sport",
 			"location": "419 Walsh Brooks","date":"2024-11-02T20:50:08.000Z",
 			"price": 1337,
 			"__v": 0
@@ -164,7 +165,8 @@ http://localhost:3001
 			},
 			"_id": "663c5d5ca3708a9482fd87d2",
 			"hasImage": false,
-			"name": "Weissnat, Greenfelder and Pacocha","type":"sport",
+			"name": "Weissnat, Greenfelder and Pacocha",
+			"type": "sport",
 			"location": "419 Walsh Brooks","date":"2024-11-02T20:50:08.000Z",
 			"price": 1337,
 			"__v": 0
@@ -189,7 +191,8 @@ http://localhost:3001
 			},
 			"_id": "663c5d5ca3708a9482fd87d2",
 			"hasImage": false,
-			"name": "Weissnat, Greenfelder and Pacocha","type":"sport",
+			"name": "Weissnat, Greenfelder and Pacocha",
+			"type": "sport",
 			"location": "419 Walsh Brooks","date":"2024-11-02T20:50:08.000Z",
 			"price": 1337,
 			"__v": 0
@@ -214,7 +217,8 @@ http://localhost:3001
 			},
 			"_id": "663c5d5ca3708a9482fd87d2",
 			"hasImage": false,
-			"name": "Weissnat, Greenfelder and Pacocha","type":"sport",
+			"name": "Weissnat, Greenfelder and Pacocha",
+			"type": "sport",
 			"location": "419 Walsh Brooks","date":"2024-11-02T20:50:08.000Z",
 			"price": 1337,
 			"__v": 0

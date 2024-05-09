@@ -56,7 +56,7 @@ app.get("/api/v1/events/exhibition/", getExhibitionEvents);
 
 // Creating ticket
 app.post("/api/v1/tickets/", verifyCredentials, createTicket);
-
+ 
 // Getting user's tickets
-app.get("/api/v1/tickets/all/", verifyCredentials, getAllTickets);
+app.post("/api/v1/tickets/all/", verifyCredentials, getAllTickets);
 app.get("/api/v1/tickets/archived/", verifyCredentials, getArchivedTickets);
