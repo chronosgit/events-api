@@ -4,10 +4,10 @@ const Models = require("../models");
 const generateSecretKey = require("../utils/generateSecretKey");
 
 const register = async (req, res) => {
-	const {username, password} = req.body;
-
 	try {
+		const {username, password} = req.body;
 		const existingUser = await Models.User.findOne({username: username});
+
 		if(existingUser) {
 			res.status(400).send({error: "User with such username already exists"});
 			return;
@@ -24,7 +24,6 @@ const register = async (req, res) => {
 		res.status(201).send({
 			id: user._id,
 			username: user.username,
-			accessToken: accessToken,
 			secret: secret,
 		});
 	} catch(error) {
