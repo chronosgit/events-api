@@ -2,7 +2,7 @@ const privateHealthCheck = async (req, res) => {
 	try {
 		const user = req.user;
 
-		res.status(200).send({message: "Events API JWT middleware is working correctly"})
+		res.status(200).send({message: "Events API credentials middleware is working correctly"})
 	} catch(error) {
 		console.error(error);
 

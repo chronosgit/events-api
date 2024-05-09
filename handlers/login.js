@@ -16,22 +16,12 @@ const handleUserLogin = async (req, res) => {
 			res.status(403).send({error: "Invalid password"});
 			return;
 		} 
-
 		delete user.password;
 
-		const payload = {
-			username: user.username,
-		}
-		const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "15m",});
-		const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {expiresIn: "1d",});
-		user.refreshToken = refreshToken; // store a user's new refresh token as well
-		await user.save();
-
-		res.cookie("JWT", refreshToken, {httpOnly: false, maxAge: 24 * 60 * 60 * 1000}); // maxAge of 1 day
 		res.status(200).send({
 			id: user._id,
 			username: user.username,
-			accessToken: accessToken,
+			secret: user.secret,
 		});
 	} catch(error) {
 		console.error(error);
