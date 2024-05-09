@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
 require("dotenv").config();
-const verifyJWT = require("./middleware/verifyJWT");
+const verifyCredentials = require("./middleware/verifyCredentials");
 const publicHealthCheck = require("./handlers/publicHealthCheck");
 const privateHealthCheck = require("./handlers/privateHealthCheck");
 const register = require("./handlers/register");
@@ -39,7 +39,7 @@ app.listen(PORT, () => {
 // NOTE: Routes
 // Healthchecks
 app.get("/api/v1/healthcheck/public/", publicHealthCheck);
-app.get("/api/v1/healthcheck/private/", verifyJWT, privateHealthCheck);
+app.get("/api/v1/healthcheck/private/", verifyCredentials, privateHealthCheck);
 
 // Authentication
 app.post("/api/v1/auth/register/", register);
@@ -55,8 +55,8 @@ app.get("/api/v1/events/concert/", getConcertEvents);
 app.get("/api/v1/events/exhibition/", getExhibitionEvents);
 
 // Creating ticket
-app.post("/api/v1/tickets/", verifyJWT, createTicket);
+app.post("/api/v1/tickets/", verifyCredentials, createTicket);
 
 // Getting user's tickets
-app.get("/api/v1/tickets/all/", verifyJWT, getAllTickets);
-app.get("/api/v1/tickets/archived/", verifyJWT, getArchivedTickets);
+app.get("/api/v1/tickets/all/", verifyCredentials, getAllTickets);
+app.get("/api/v1/tickets/archived/", verifyCredentials, getArchivedTickets);
