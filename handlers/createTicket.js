@@ -30,6 +30,11 @@ const createTicket = async (req, res) => {
 		}
 
 		const event = await Models.Event.findOne({_id: eventId});
+
+		if(!event) {
+			res.status(404).send({error: "Event with such id doesn't exist"});
+		}
+
 		const newTicket = new Models.Ticket({
 			quantity, price, event: event, user: user
 		});
