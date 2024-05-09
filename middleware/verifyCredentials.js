@@ -4,13 +4,13 @@ const verifyJWT = async (req, res, next) => {
 	try {
 		const secret = req.body["secret"];
 		const username = req.body["username"];
-
+		
 		if(!secret) {
 			return res.status(401).send({error: "Secret is not provided in body"});
 		}
 
 		const user = await Models.User.findOne({username: username, secret: secret});
-
+		
 		if(!user) {
 			res.status(403).send({error: "User with such username and secret doesn't exist"});
 			return;
@@ -21,7 +21,7 @@ const verifyJWT = async (req, res, next) => {
 			username: username,
 			secret: secret,
 		};
-		
+
 		next();
 	} catch(error) {
 		console.error(error);
