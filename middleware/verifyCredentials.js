@@ -26,7 +26,7 @@ const verifyJWT = async (req, res, next) => {
 	} catch(error) {
 		console.error(error);
 
-		res.status(500).send({error: "Refreshing a token resulted in error"});
+		res.status(500).send({error: "Verifying credentials resulted in error"});
 	}
 }
 
